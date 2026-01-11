@@ -16,4 +16,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# Make startup script executable
+RUN chmod +x start.sh
+
+# Expose port
+EXPOSE 8000
+
+# Run production startup script
+CMD ["./start.sh"]
