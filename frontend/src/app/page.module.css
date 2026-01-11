@@ -1,0 +1,267 @@
+.container {
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  color: #f0f0f0;
+  font-family: var(--font-noto-sans), system-ui, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: linear-gradient(to bottom, #222 0%, #1a1a1a 100%);
+  border-bottom: 1px solid #333;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #aaa;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.main {
+  flex: 1;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Grid Layout */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding-bottom: 4rem;
+}
+
+/* Card Styles */
+.card {
+  background: #252525;
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1.25rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  width: 100%;
+  color: #fff;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  background: #2a2a2a;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+  border-color: #555;
+}
+
+.cardIcon {
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardContent {
+  flex: 1;
+  overflow: hidden;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.cardId {
+  display: block;
+  font-size: 0.75rem;
+  color: #888;
+  margin-top: 0.25rem;
+}
+
+/* PDF File Card Specifics */
+.fileCard {
+  background: #2a2a2a;
+  border-left: 4px solid #ef4444; /* PDF Red Accent */
+}
+
+.fileCard:hover {
+  background: #333;
+  border-color: #333;
+  border-left-color: #ff5555;
+}
+
+.fileCard .cardIcon {
+  color: #ef4444; /* Red Icon for PDF */
+}
+
+.fileCard .cardTitle {
+  font-weight: 700; /* Bolder text for files */
+  color: #fff;
+}
+
+/* Search Form */
+.searchForm {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.searchInput {
+  padding: 0.8rem 1.2rem;
+  border-radius: 50px;
+  border: 1px solid #444;
+  background: #2a2a2a;
+  color: #fff;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 400px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.searchInput:focus {
+  border-color: #888;
+  background: #333;
+}
+
+.searchButton {
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  border: none;
+  background: #fff;
+  color: #1a1a1a;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.searchButton:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.searchButton:active {
+  transform: scale(0.98);
+}
+
+/* Breadcrumbs */
+.breadcrumbs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.breadcrumbItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #666;
+}
+
+.crumbLink {
+  background: none;
+  border: none;
+  color: #888;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  transition: color 0.2s;
+}
+
+.crumbLink:hover {
+  color: #fff;
+  background: #333;
+}
+
+.activeCrumb {
+  background: none;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  cursor: default;
+}
+
+.separator {
+  color: #444;
+  font-size: 0.8rem;
+}
+
+/* States */
+.loadingState, .errorState, .emptyState {
+  text-align: center;
+  padding: 4rem;
+  color: #888;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin: 0 auto 1.5rem;
+}
+
+.errorState h2 {
+  color: #ef4444;
+}
+
+.retryBtn {
+  background: #fff;
+  color: #1a1a1a;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1.5rem;
+}
+
+/* Footer */
+.footer {
+  padding: 2rem;
+  text-align: center;
+  border-top: 1px solid #333;
+  margin-top: auto;
+}
+
+.footerContent {
+  color: #666;
+  font-size: 0.8rem;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

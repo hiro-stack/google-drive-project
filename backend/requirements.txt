@@ -1,0 +1,9 @@
+Django>=5.0,<6.0
+djangorestframework
+django-cors-headers
+mysqlclient
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+python-dotenv
+gunicorn
