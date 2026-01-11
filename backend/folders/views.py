@@ -53,9 +53,21 @@ class FolderListView(APIView):
             )
 
         try:
-            creds = service_account.Credentials.from_service_account_file(
-                creds_path, scopes=['https://www.googleapis.com/auth/drive.metadata.readonly']
-            )
+            # 優先: 環境変数からJSON文字列を読み込む（デプロイ環境用）
+            json_creds = os.environ.get('GOOGLE_CREDENTIALS_JSON')
+            
+            if json_creds:
+                import json
+                info = json.loads(json_creds)
+                creds = service_account.Credentials.from_service_account_info(
+                    info, scopes=['https://www.googleapis.com/auth/drive.metadata.readonly']
+                )
+            else:
+                # フォールバック: ローカルファイルから読み込む
+                creds = service_account.Credentials.from_service_account_file(
+                    creds_path, scopes=['https://www.googleapis.com/auth/drive.metadata.readonly']
+                )
+
             service = build('drive', 'v3', credentials=creds)
             
             query_text = request.query_params.get("query")
