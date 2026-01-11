@@ -1,0 +1,43 @@
+services:
+  # Python Backend Service
+  - type: web
+    name: drive-explorer-backend
+    runtime: python
+    repo: https://github.com/hiro-stack/google-drive-project
+    plan: free
+    region: singapore # or oregon, frankfurt
+    rootDir: backend
+    buildCommand: "pip install -r requirements.txt && python manage.py collectstatic --noinput"
+    startCommand: "gunicorn config.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DEBUG
+        value: "False"
+      - key: DJANGO_ALLOWED_HOSTS
+        value: "*" # For simplicity. In production, restrict this.
+      - key: SECRET_KEY
+        generateValue: true
+      - key: GOOGLE_DRIVE_FOLDER_ID
+        sync: false # Set in Dashboard
+      - key: GOOGLE_CREDENTIALS_JSON
+        sync: false # Set in Dashboard
+
+  # Next.js Frontend Service
+  - type: web
+    name: drive-explorer-frontend
+    runtime: node
+    repo: https://github.com/hiro-stack/google-drive-project
+    plan: free
+    region: singapore
+    rootDir: frontend
+    buildCommand: "npm install && npm run build"
+    startCommand: "npm run start"
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: drive-explorer-backend
+          property: url # Automatically link backend URL!
