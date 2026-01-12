@@ -103,3 +103,20 @@ CORS_ALLOW_ALL_ORIGINS = True # Simplest for demo/production mix
 
 GOOGLE_DRIVE_FOLDER_ID = os.getenv('GOOGLE_DRIVE_FOLDER_ID')
 GOOGLE_SERVICE_ACCOUNT_FILE = os.getenv('GOOGLE_SERVICE_ACCOUNT_FILE', 'service_account.json')
+
+# Base64エンコードされたサービスアカウントキーをデコードしてファイルとして保存
+import base64
+
+b64_content = os.getenv("GOOGLE_SERVICE_ACCOUNT_B64")
+if b64_content:
+    # service_account.json がまだ存在しない場合のみ作成
+    service_account_path = BASE_DIR / GOOGLE_SERVICE_ACCOUNT_FILE
+    if not service_account_path.exists():
+        try:
+            decoded_content = base64.b64decode(b64_content).decode("utf-8")
+            with open(service_account_path, "w", encoding="utf-8") as f:
+                f.write(decoded_content)
+            print(f"✅ Created {GOOGLE_SERVICE_ACCOUNT_FILE} from GOOGLE_SERVICE_ACCOUNT_B64")
+        except Exception as e:
+            print(f"❌ Failed to decode GOOGLE_SERVICE_ACCOUNT_B64: {e}")
+
