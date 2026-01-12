@@ -38,20 +38,7 @@ class FolderListView(APIView):
     def get(self, request):
         # Use query param 'folder_id' if provided, otherwise default to env var
         folder_id = request.query_params.get('folder_id') or settings.GOOGLE_DRIVE_FOLDER_ID
-        creds_file = settings.GOOGLE_SERVICE_ACCOUNT_FILE
         
-        # Determine absolute path for creds file if it's relative
-        if creds_file and not os.path.isabs(creds_file):
-            creds_path = os.path.join(settings.BASE_DIR, creds_file)
-        else:
-            creds_path = creds_file
-
-        if not creds_path or not os.path.exists(creds_path):
-            return Response(
-                {"error": "Service account file not found. Please ensure 'service_account.json' is present in the backend root."},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
-
         try:
             # 優先: 環境変数からJSON文字列を読み込む（デプロイ環境用）
             json_creds = os.environ.get('GOOGLE_CREDENTIALS_JSON')
@@ -64,6 +51,20 @@ class FolderListView(APIView):
                 )
             else:
                 # フォールバック: ローカルファイルから読み込む
+                creds_file = settings.GOOGLE_SERVICE_ACCOUNT_FILE
+                
+                # Determine absolute path for creds file if it's relative
+                if creds_file and not os.path.isabs(creds_file):
+                    creds_path = os.path.join(settings.BASE_DIR, creds_file)
+                else:
+                    creds_path = creds_file
+
+                if not creds_path or not os.path.exists(creds_path):
+                    return Response(
+                        {"error": "Service account file not found. Please ensure 'service_account.json' is present in the backend root or set GOOGLE_CREDENTIALS_JSON environment variable."},
+                        status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                    )
+                
                 creds = service_account.Credentials.from_service_account_file(
                     creds_path, scopes=['https://www.googleapis.com/auth/drive.metadata.readonly']
                 )
