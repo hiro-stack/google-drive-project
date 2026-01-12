@@ -9,7 +9,8 @@ const withPWA = require("next-pwa")({
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  turbopack: {}, // Turbopackを明示的に有効化（Next.js 16対応）
+  // PWA (next-pwa) との互換性のため、Turbopackは使用しない
+  // turbopack: {},
   /* config options here */
 };
 
