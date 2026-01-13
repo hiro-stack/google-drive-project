@@ -171,6 +171,39 @@
   transform: scale(0.98);
 }
 
+.micButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 52px;              /* Searchボタンの高さに合わせて大きく */
+  height: 52px;
+  margin-left: 0.8rem;
+  transition: all 0.2s ease;
+  opacity: 0.9;
+}
+
+.micButton img {
+  width: 32px;              /* アイコン自体も大きく */
+  height: 32px;
+  object-fit: contain;
+  transition: filter 0.2s ease;
+}
+
+/* ホバー時: 白背景になり、アイコン(白)を反転させて黒にする */
+.micButton:hover {
+  background-color: #fff;
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+.micButton:hover img {
+  filter: invert(1);        /* 白アイコン → 黒アイコン */
+}
+
 /* Breadcrumbs */
 .breadcrumbs {
   display: flex;

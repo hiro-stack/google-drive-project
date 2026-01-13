@@ -57,33 +57,12 @@ export const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
       <button 
         type="button" 
         onClick={handleVoiceInput} 
-        style={{ 
-          backgroundColor: 'transparent',
-          border: 'none',
-          padding: '0',
-          marginLeft: '0.5rem',
-          cursor: 'pointer',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          opacity: 0.9,
-          transition: 'opacity 0.2s',
-          borderRadius: '50%', // クリック範囲を丸くする
-          width: '40px',       // 正円にするための固定サイズ
-          height: '40px',
-        }}
+        className={styles.micButton}
         title="Voice Search"
-        onMouseOver={(e) => e.currentTarget.style.opacity = '1'}
-        onMouseOut={(e) => e.currentTarget.style.opacity = '0.9'}
       >
         <img 
           src="/mic-icon.png" 
           alt="Voice Search" 
-          style={{ 
-            width: '28px', 
-            height: '28px', 
-            objectFit: 'contain',
-          }}
         />
       </button>
     </form>
