@@ -80,7 +80,8 @@ export const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
             width: '28px', 
             height: '28px', 
             objectFit: 'contain',
-            filter: 'invert(1)',
+            // 生成された画像は「黒背景に白」なので、色反転は不要。
+            // スクリーン合成で黒背景を透過させるだけでOK。
             mixBlendMode: 'screen'
           }}
         />
