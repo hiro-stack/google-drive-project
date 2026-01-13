@@ -104,6 +104,7 @@ class FolderListView(APIView):
                                 final_query_parts.append(synonym_parts[0])
                                 
                     name_conditions = " and ".join(final_query_parts)
+                    print(f"DEBUG: Search Query Conditions: {name_conditions}")
 
                     all_items = []
                     
