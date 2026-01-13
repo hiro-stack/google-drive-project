@@ -57,31 +57,32 @@ export const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
       <button 
         type="button" 
         onClick={handleVoiceInput} 
-        className={styles.searchButton}
         style={{ 
-          backgroundColor: '#fff', // 白背景を明示
-          padding: '0',           // 画像を最大化するためパディング削除
+          backgroundColor: 'transparent',
           border: 'none',
-          borderRadius: '50%',    // 完全な丸にする
-          width: '42px',          // Searchボタンの高さに合わせる
-          height: '42px',
-          minWidth: '42px',
+          padding: '0.5rem',
+          marginLeft: '0.5rem', // Searchボタンからの距離
+          cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          overflow: 'hidden',     // 四角い画像の角を隠す
-          marginLeft: '0.5rem'
+          opacity: 0.8,
+          transition: 'opacity 0.2s',
         }}
         title="Voice Search"
+        onMouseOver={(e) => e.currentTarget.style.opacity = '1'}
+        onMouseOut={(e) => e.currentTarget.style.opacity = '0.8'}
       >
         <img 
           src="/mic-icon.png" 
           alt="Voice Search" 
           style={{ 
-            width: '24px', 
-            height: '24px', 
+            width: '28px', 
+            height: '28px', 
             objectFit: 'contain',
-            mixBlendMode: 'multiply' // 画像の白背景をボタンの白背景と馴染ませる（念のため）
+            // 重要: 白背景の黒アイコンを、ダークモード用の「背景透過・白アイコン」に見せるトリック
+            filter: 'invert(1)',        // 色反転（白背景→黒、黒線画→白）
+            mixBlendMode: 'screen'      // スクリーン合成（黒を透過させ、白を残す）
           }}
         />
       </button>
