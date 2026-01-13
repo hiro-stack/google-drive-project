@@ -66,12 +66,12 @@ export const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          opacity: 0.8,
+          opacity: 0.9, // 少し明るく
           transition: 'opacity 0.2s',
         }}
         title="Voice Search"
         onMouseOver={(e) => e.currentTarget.style.opacity = '1'}
-        onMouseOut={(e) => e.currentTarget.style.opacity = '0.8'}
+        onMouseOut={(e) => e.currentTarget.style.opacity = '0.9'}
       >
         <img 
           src="/mic-icon.png" 
@@ -80,9 +80,8 @@ export const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
             width: '28px', 
             height: '28px', 
             objectFit: 'contain',
-            // 重要: 白背景の黒アイコンを、ダークモード用の「背景透過・白アイコン」に見せるトリック
-            filter: 'invert(1)',        // 色反転（白背景→黒、黒線画→白）
-            mixBlendMode: 'screen'      // スクリーン合成（黒を透過させ、白を残す）
+            filter: 'invert(1)',
+            mixBlendMode: 'screen'
           }}
         />
       </button>

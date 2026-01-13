@@ -129,40 +129,42 @@
 }
 
 .searchInput {
-  padding: 0.8rem 1.2rem;
+  padding: 0.9rem 1.4rem;  /* 少し広げて余裕を持たせる */
   border-radius: 50px;
-  border: 1px solid #444;
-  background: #2a2a2a;
+  border: 1px solid #333; /* 枠線を少し暗く */
+  background: #181818;    /* より深い黒に近いグレー */
   color: #fff;
   font-size: 1rem;
   width: 100%;
-  max-width: 400px;
+  max-width: 450px;       /* 少し長くする */
   outline: none;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
 }
 
 .searchInput:focus {
-  border-color: #888;
-  background: #333;
+  border-color: #555;
+  background: #222;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
 .searchButton {
-  padding: 0.8rem 1.5rem;
+  padding: 0.9rem 2rem;   /* ボタンも少し大きく */
   border-radius: 50px;
   border: none;
   background: #fff;
-  color: #1a1a1a;
-  font-weight: 700;
+  color: #000;            /* 完全な黒 */
+  font-weight: 800;       /* より太く */
   cursor: pointer;
-  transition: opacity 0.2s, transform 0.1s;
+  transition: opacity 0.2s, transform 0.1s, background-color 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1rem;
 }
 
 .searchButton:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
+  background-color: #f0f0f0;
+  transform: translateY(-1px);
 }
 
 .searchButton:active {
