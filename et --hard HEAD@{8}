@@ -1,0 +1,23 @@
+[33ma60f054[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m HEAD@{0}: commit: Restore stable version with updated icon design (fixes render port/csrf)
+[33m582c57e[m HEAD@{1}: reset: moving to 582c57e
+[33me55df5c[m HEAD@{2}: commit: Fix backend port binding for Render deployment
+[33ma8bfd86[m HEAD@{3}: commit: 機能改善エラー対処２
+[33med773b3[m HEAD@{4}: commit: 機能改善エラー対処
+[33ma28c212[m HEAD@{5}: commit: 機能改善
+[33m582c57e[m HEAD@{6}: commit: 各機能の強化(音声、検索の標準化)
+[33m7a42b40[m HEAD@{7}: commit: 音声機能の向上
+[33m1eb61a7[m HEAD@{8}: commit: ReadMeの設定
+[33mecda3a3[m HEAD@{9}: commit: Fix: Disable Turbopack for next-pwa compatibility
+[33md9dce49[m HEAD@{10}: commit: Add PWA icons for offline support
+[33m6c151ad[m HEAD@{11}: commit: Trigger redeploy
+[33mbdc845d[m HEAD@{12}: commit: Fix: Add turbopack config for Next.js 16 compatibility
+[33m6a9bc5d[m HEAD@{13}: commit: Add Base64 service account decoding in settings.py
+[33m4c5665b[m HEAD@{14}: commit: Fix: Prioritize GOOGLE_CREDENTIALS_JSON env var for Render deployment
+[33m3d63279[m HEAD@{15}: commit: Remove root package files to fix Render deployment
+[33m646d02f[m HEAD@{16}: commit: Add Node version file for Render
+[33m86ad8ee[m HEAD@{17}: commit: Fix production deployment: use gunicorn and run migrations
+[33mb8fb408[m HEAD@{18}: commit: Configure for Render deployment with DB support
+[33m4fa4f82[m HEAD@{19}: commit: Support env var credentials
+[33mc62d39f[m HEAD@{20}: commit (amend): Initial release
+[33mfa50f3b[m HEAD@{21}: Branch: renamed refs/heads/master to refs/heads/main
+[33mfa50f3b[m HEAD@{23}: commit (initial): Initial release
