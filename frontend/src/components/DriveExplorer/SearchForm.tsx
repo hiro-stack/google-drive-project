@@ -59,18 +59,30 @@ export const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         onClick={handleVoiceInput} 
         className={styles.searchButton}
         style={{ 
-          backgroundColor: 'transparent',
-          padding: '0.4rem', 
+          backgroundColor: '#fff', // 白背景を明示
+          padding: '0',           // 画像を最大化するためパディング削除
           border: 'none',
-          boxShadow: 'none',
-          minWidth: 'auto'
+          borderRadius: '50%',    // 完全な丸にする
+          width: '42px',          // Searchボタンの高さに合わせる
+          height: '42px',
+          minWidth: '42px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',     // 四角い画像の角を隠す
+          marginLeft: '0.5rem'
         }}
         title="Voice Search"
       >
         <img 
           src="/mic-icon.png" 
           alt="Voice Search" 
-          style={{ width: '28px', height: '28px', objectFit: 'contain' }}
+          style={{ 
+            width: '24px', 
+            height: '24px', 
+            objectFit: 'contain',
+            mixBlendMode: 'multiply' // 画像の白背景をボタンの白背景と馴染ませる（念のため）
+          }}
         />
       </button>
     </form>
