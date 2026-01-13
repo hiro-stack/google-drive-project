@@ -60,14 +60,17 @@ export const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         style={{ 
           backgroundColor: 'transparent',
           border: 'none',
-          padding: '0.5rem',
-          marginLeft: '0.5rem', // Searchボタンからの距離
+          padding: '0',
+          marginLeft: '0.5rem',
           cursor: 'pointer',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          opacity: 0.9, // 少し明るく
+          opacity: 0.9,
           transition: 'opacity 0.2s',
+          borderRadius: '50%', // クリック範囲を丸くする
+          width: '40px',       // 正円にするための固定サイズ
+          height: '40px',
         }}
         title="Voice Search"
         onMouseOver={(e) => e.currentTarget.style.opacity = '1'}
