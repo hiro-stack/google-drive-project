@@ -1,12 +1,17 @@
-import jaconv
-import romkan
 import re
+
+# ライブラリがインストールされていない場合でもサーバーが落ちないようにする
+try:
+    import jaconv
+    import romkan
+    HAS_NLP_LIBS = True
+except ImportError:
+    HAS_NLP_LIBS = False
+    print("Warning: jaconv or romkan not found. Algorithmic expansion disabled.")
 
 class SynonymDict:
     def __init__(self):
         # 簡易類義語/表記ゆれ辞書
-        # キー: 正規化された単語（小文字）
-        # 値: 類義語リスト
         self.dictionary = {
             'happy': ['happy', 'ハッピー', 'happier', 'unhappy', '幸せ'],
             'ハッピー': ['happy', 'ハッピー', 'happier', 'unhappy', '幸せ'],
@@ -21,13 +26,20 @@ class SynonymDict:
 
     def normalize(self, text):
         """
-        簡易正規化: 小文字変換、全角・半角スペース統一など
+        簡易正規化
         """
         if not text:
             return ""
-        # 全角英数を半角に、半角カタカナを全角に統一
-        text = jaconv.z2h(text, kana=False, digit=True, ascii=True) # 全角英数→半角
-        text = jaconv.h2z(text, kana=True, digit=False, ascii=False) # 半角カナ→全角
+        
+        # ライブラリがある場合のみ高度な正規化を行う
+        if HAS_NLP_LIBS:
+            try:
+                # 全角英数を半角に、半角カタカナを全角に統一
+                text = jaconv.z2h(text, kana=False, digit=True, ascii=True) 
+                text = jaconv.h2z(text, kana=True, digit=False, ascii=False)
+            except Exception:
+                pass
+                
         return text.lower().strip()
 
     def get_synonyms(self, word):
@@ -48,28 +60,26 @@ class SynonymDict:
         if norm_word in self.dictionary:
             synonyms.update(self.dictionary[norm_word])
 
-        # 3. アルゴリズム的拡張 (Algorithmic Expansion)
-        
-        # A. ひらがな ⇔ カタカナ
-        hira = jaconv.kata2hira(norm_word)
-        kata = jaconv.hira2kata(norm_word)
-        synonyms.add(hira)
-        synonyms.add(kata)
-        
-        # B. ローマ字 → カタカナ/ひらがな (入力がアルファベットの場合)
-        if re.match(r'^[a-zA-Z]+$', norm_word):
+        # 3. アルゴリズム的拡張 (ライブラリがある場合のみ)
+        if HAS_NLP_LIBS:
             try:
-                # romkanライブラリで変換 (例: "sushi" -> "スシ")
-                converted_kata = romkan.to_katakana(norm_word)
-                converted_hira = romkan.to_hiragana(norm_word)
-                synonyms.add(converted_kata)
-                synonyms.add(converted_hira)
-            except:
+                # A. ひらがな ⇔ カタカナ
+                hira = jaconv.kata2hira(norm_word)
+                kata = jaconv.hira2kata(norm_word)
+                synonyms.add(hira)
+                synonyms.add(kata)
+                
+                # B. ローマ字 → カタカナ/ひらがな (入力がアルファベットの場合)
+                if re.match(r'^[a-zA-Z]+$', norm_word):
+                    # romkanライブラリで変換
+                    converted_kata = romkan.to_katakana(norm_word)
+                    converted_hira = romkan.to_hiragana(norm_word)
+                    synonyms.add(converted_kata)
+                    synonyms.add(converted_hira)
+            except Exception as e:
+                # 変換エラー時は無視
                 pass
 
-        # C. カタカナ/ひらがな → ローマ字 (逆変換は文脈依存で難しいが、romkanはある程度可能)
-        # 今回は誤爆を防ぐため、ローマ字への逆変換は行わない、もしくは主要なものだけに限定。
-
-        return list(synonyms) # 重複排除してリスト化
+        return list(synonyms)
 
 synonym_dict = SynonymDict()
