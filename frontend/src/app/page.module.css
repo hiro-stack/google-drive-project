@@ -300,3 +300,60 @@
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
+
+/* Mobile Responsive Design */
+@media (max-width: 768px) {
+  .header {
+    padding: 1.5rem 1rem;
+  }
+
+  .title {
+    font-size: 1.8rem;
+    padding: 0 1rem;
+  }
+  
+  .subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .main {
+    padding: 1rem 0.5rem;
+  }
+
+  .searchForm {
+    padding: 0 0.5rem;
+    gap: 0.8rem;
+  }
+
+  .searchInput {
+    /* モバイルでは入力欄を100%幅にして上段へ */
+    flex: 1 1 100%;
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .searchButton {
+    /* ボタンを押しやすく */
+    flex: 1;
+    min-width: 140px;
+    padding: 1rem;
+  }
+  
+  .micButton {
+    /* マイクボタン */
+    margin-left: 0.5rem;
+  }
+
+  /* カードリストは1列で見やすく */
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0 0.5rem 6rem 0.5rem;
+  }
+  
+  .card {
+    padding: 1rem 1.2rem;
+  }
+}
