@@ -58,10 +58,20 @@ export const SearchForm: React.FC<SearchFormProps> = ({ onSearch }) => {
         type="button" 
         onClick={handleVoiceInput} 
         className={styles.searchButton}
-        style={{ backgroundColor: '#2dd4bf', padding: '0.75rem 1rem' }}
+        style={{ 
+          backgroundColor: 'transparent',
+          padding: '0.4rem', 
+          border: 'none',
+          boxShadow: 'none',
+          minWidth: 'auto'
+        }}
         title="Voice Search"
       >
-        🎙
+        <img 
+          src="/mic-icon.png" 
+          alt="Voice Search" 
+          style={{ width: '28px', height: '28px', objectFit: 'contain' }}
+        />
       </button>
     </form>
   );
