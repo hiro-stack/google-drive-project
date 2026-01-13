@@ -5,6 +5,7 @@ from rest_framework import status
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import os
+from search.synonyms import synonym_dict
 
 def list_all_folder_ids(service, parent_id):
     """Recursive function to get all subfolder IDs."""
@@ -79,13 +80,30 @@ class FolderListView(APIView):
                     # 1. Get all folder IDs (recursive)
                     all_folder_ids = list_all_folder_ids(service, folder_id)
                     
-                    # 2. Prepare search query (keywords AND logic)
+                    # 2. Prepare search query (keywords AND logic, synonyms OR logic)
                     keywords = query_text.replace('　', ' ').split()
-                    name_query_parts = []
+                    final_query_parts = []
+                    
                     for keyword in keywords:
-                        safe_keyword = keyword.replace("'", "\\'")
-                        name_query_parts.append(f"name contains '{safe_keyword}'")
-                    name_conditions = " and ".join(name_query_parts)
+                        # 類義語を取得
+                        synonyms = synonym_dict.get_synonyms(keyword)
+                        
+                        # 類義語ごとのクエリ (OR条件)
+                        # name contains 'A' or name contains 'B'
+                        synonym_parts = []
+                        for syn in synonyms:
+                            safe_syn = syn.replace("'", "\\'")
+                            synonym_parts.append(f"name contains '{safe_syn}'")
+                        
+                        if synonym_parts:
+                            # 複数の類義語がある場合はカッコで囲む
+                            if len(synonym_parts) > 1:
+                                joined_or = " or ".join(synonym_parts)
+                                final_query_parts.append(f"({joined_or})")
+                            else:
+                                final_query_parts.append(synonym_parts[0])
+                                
+                    name_conditions = " and ".join(final_query_parts)
 
                     all_items = []
                     
