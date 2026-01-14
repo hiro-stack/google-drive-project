@@ -22,7 +22,7 @@ class SynonymDict:
             '楽譜': ['music', '音楽', 'score', '楽譜'],
             'hymn': ['hymn', '賛美歌', '聖歌'],
             '賛美歌': ['hymn', '賛美歌', '聖歌'],
-        }
+        }/
 
     def normalize(self, text):
         """
