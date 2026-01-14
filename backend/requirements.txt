@@ -8,3 +8,5 @@ mysqlclient>=2.2.0
 python-dotenv>=1.0.0
 gunicorn>=21.2.0
 whitenoise>=6.6.0
+jaconv>=0.3.0
+romkan>=0.2.1
