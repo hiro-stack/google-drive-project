@@ -5,9 +5,10 @@ try:
     import jaconv
     import romkan
     HAS_NLP_LIBS = True
-except ImportError:
+    print("✅ jaconv and romkan successfully imported. Algorithmic expansion ENABLED.")
+except ImportError as e:
     HAS_NLP_LIBS = False
-    print("Warning: jaconv or romkan not found. Algorithmic expansion disabled.")
+    print(f"⚠️ Warning: jaconv or romkan not found ({e}). Algorithmic expansion DISABLED.")
 
 class SynonymDict:
     def __init__(self):
@@ -49,6 +50,8 @@ class SynonymDict:
         if not word:
             return []
             
+        print(f"DEBUG: get_synonyms called with word='{word}', HAS_NLP_LIBS={HAS_NLP_LIBS}")
+        
         synonyms = set()
         synonyms.add(word)
         
@@ -80,6 +83,8 @@ class SynonymDict:
                 # 変換エラー時は無視
                 pass
 
-        return list(synonyms)
+        result = list(synonyms)
+        print(f"DEBUG: get_synonyms result for '{word}': {result}")
+        return result
 
 synonym_dict = SynonymDict()
