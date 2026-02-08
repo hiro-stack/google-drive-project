@@ -37,7 +37,4 @@ services:
       - key: NODE_VERSION
         value: 20
       - key: NEXT_PUBLIC_API_URL
-        fromService:
-          type: web
-          name: drive-explorer-backend
-          property: url # Automatically link backend URL!
+        sync: false # Set manually after backend is deployed
