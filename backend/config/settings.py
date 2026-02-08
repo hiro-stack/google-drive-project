@@ -120,3 +120,8 @@ if b64_content:
         except Exception as e:
             print(f"❌ Failed to decode GOOGLE_SERVICE_ACCOUNT_B64: {e}")
 
+# キャッシュ設定
+FOLDER_CACHE_MAX_AGE_HOURS = int(os.getenv('FOLDER_CACHE_MAX_AGE_HOURS', '24'))
+SEARCH_RESULT_CACHE_MINUTES = int(os.getenv('SEARCH_RESULT_CACHE_MINUTES', '30'))
+ENABLE_SEARCH_RESULT_CACHE = os.getenv('ENABLE_SEARCH_RESULT_CACHE', 'True') == 'True'
+
